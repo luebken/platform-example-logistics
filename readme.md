@@ -4,6 +4,7 @@ An Example Crossplane Platform for Logistics.
 
 ## Install Providers
 
+### AWS
 ```
 kubectl crossplane install provider crossplane/provider-aws:v0.26.1
 
@@ -27,6 +28,11 @@ spec:
       name: aws-creds
       key: creds
 EOF
+```
+
+### NOP
+```
+kubectl crossplane install provider crossplane/provider-nop:v0.1.1
 ```
 
 ## Platform
