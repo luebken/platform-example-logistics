@@ -9,7 +9,7 @@ spec:
     apiVersion: logistics.example.com/v1alpha1
     kind: XShip
   resources:
-  - name: bucket1
+  - name: bucket
     base:
       apiVersion: s3.aws.crossplane.io/v1beta1
       kind: Bucket
@@ -27,3 +27,18 @@ spec:
     - type: ToCompositeFieldPath
       fromFieldPath: status.atProvider.arn
       toFieldPath: status.lat
+  - name: somesensor
+    base:
+      apiVersion: nop.crossplane.io/v1alpha1
+      kind: NopResource
+      metadata:
+        name: somesensor
+      spec:
+        forProvider:
+          conditionAfter:
+            - conditionType: "Ready"
+              conditionStatus: "True"
+              time: "3s"
+            - conditionType: "Synced"
+              conditionStatus: "True"
+              time: "1s"
