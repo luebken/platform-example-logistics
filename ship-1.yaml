@@ -1,0 +1,11 @@
+apiVersion: logistics.example.com/v1alpha1
+kind: Ship
+metadata:
+  name: ship-test-123
+  namespace: default
+spec:
+  compositionSelector:
+    matchLabels:
+      provider: dummy
+  parameters:
+    shipName: ship-test-123

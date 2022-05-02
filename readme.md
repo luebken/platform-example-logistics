@@ -38,24 +38,17 @@ kubectl apply -f ship-dummy-composition.yaml
 
 Use:
 ```
-SHIP_NAME=test-ship-$RANDOM
-
-cat <<EOF | kubectl create -f -
-apiVersion: logistics.example.com/v1alpha1
-kind: Ship
-metadata:
-  name: $SHIP_NAME
-  namespace: default
-spec:
-  compositionSelector:
-    matchLabels:
-      provider: dummy
-  parameters:
-    shipName: $SHIP_NAME
-EOF
+kubectl apply -f ship-1.yaml
 ```
 
 ```
 kubectl get ships -o=custom-columns=NAME:.metadata.name,LNG:.status.lng,LAT:.status.lat
+```
+
+Delete:
+```
+kubectl delete ships -f ship-1.yaml
+kubectl delete composition.apiextensions.crossplane.io/xships-dummy
+kubectl delete compositeresourcedefinition.apiextensions.crossplane.io/xships.logistics.example.com
 ```
 
