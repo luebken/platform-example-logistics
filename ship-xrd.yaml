@@ -1,0 +1,42 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xships.logistics.example.com
+spec:
+  group: logistics.example.com
+  names:
+    kind: XShip
+    plural: xships
+  claimNames:
+    kind: Ship
+    plural: ships
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              parameters:
+                type: object
+                properties:
+                  shipName:
+                    description: The Ship name
+                    type: string
+                required:
+                - shipName
+            required:
+            - parameters
+          status:
+            type: object
+            properties:
+              lat:
+                description: Latitude of the ship.
+                type: string
+              lng:
+                description: Latitude of the ship.
+                type: string
