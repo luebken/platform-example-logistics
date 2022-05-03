@@ -14,6 +14,13 @@ spec:
   - name: v1alpha1
     served: true
     referenceable: true
+    additionalPrinterColumns:
+    - jsonPath: .status.lat
+      name: LAT
+      type: string
+    - jsonPath: .status.lng
+      name: LNG
+      type: string
     schema:
       openAPIV3Schema:
         type: object
