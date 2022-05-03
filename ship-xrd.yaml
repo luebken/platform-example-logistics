@@ -27,8 +27,12 @@ spec:
                   shipName:
                     description: The Ship name
                     type: string
+                  imo:
+                    description: The IMO
+                    type: string
                 required:
                 - shipName
+                - imo
             required:
             - parameters
           status:

@@ -2,40 +2,19 @@
 
 An Example Crossplane Platform for Logistics. 
 
+## Install K8s & Crossplane
+```
+kind create cluster --image kindest/node:v1.23.5
+helm install crossplane --namespace crossplane-system --create-namespace crossplane-stable/crossplane
+```
+
 ## Install Providers
-
-### AWS
 ```
-kubectl crossplane install provider crossplane/provider-aws:v0.26.1
-
-# Create a creds.conf file with the aws cli:
-AWS_PROFILE=default && echo -e "[default]\naws_access_key_id = $(aws configure get aws_access_key_id --profile $AWS_PROFILE)\naws_secret_access_key = $(aws configure get aws_secret_access_key --profile $AWS_PROFILE)" > creds.conf
-
-# Create a K8s secret with the AWS creds:
-kubectl create secret generic aws-creds -n crossplane-system --from-file=creds=./creds.conf
-
-# Configure AWS Provider by creating a ProviderConfig
-cat <<EOF | kubectl apply -f -
-apiVersion: aws.crossplane.io/v1beta1
-kind: ProviderConfig
-metadata:
-  name: default
-spec:
-  credentials:
-    source: Secret
-    secretRef:
-      namespace: crossplane-system
-      name: aws-creds
-      key: creds
-EOF
-```
-
-### NOP
-```
+kubectl crossplane install provider luebken/provider-gps-dummy:v0.1.4
 kubectl crossplane install provider crossplane/provider-nop:v0.1.1
 ```
 
-## Platform
+## Install the Logistics Platform
 Define:
 ```
 kubectl apply -f ship-xrd.yaml
@@ -45,16 +24,15 @@ kubectl apply -f ship-dummy-composition.yaml
 Use:
 ```
 kubectl apply -f ship-1.yaml
-```
 
-```
 kubectl get ships -o=custom-columns=NAME:.metadata.name,LNG:.status.lng,LAT:.status.lat
+NAME            LNG       LAT
+ship-test-123   1.35469   53.99429
 ```
 
-Delete:
+Cleanup:
 ```
-kubectl delete ships -f ship-1.yaml
+kubectl delete -f ship-1.yaml
 kubectl delete composition.apiextensions.crossplane.io/xships-dummy
 kubectl delete compositeresourcedefinition.apiextensions.crossplane.io/xships.logistics.example.com
 ```
-

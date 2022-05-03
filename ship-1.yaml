@@ -9,3 +9,4 @@ spec:
       provider: dummy
   parameters:
     shipName: ship-test-123
+    imo: "123"
