@@ -31,8 +31,6 @@ spec:
       metadata:
         name: "vessel-imo-9259501"
       spec:
-        forProvider:
-          imo: "9259501"
         providerConfigRef:
           name: example
     patches:
@@ -42,3 +40,6 @@ spec:
     - type: ToCompositeFieldPath
       fromFieldPath: status.atProvider.lat
       toFieldPath: status.lat
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.imo
+      toFieldPath: spec.forProvider.imo
