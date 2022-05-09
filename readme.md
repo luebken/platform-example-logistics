@@ -21,18 +21,13 @@ kubectl apply -f ship-xrd.yaml
 kubectl apply -f ship-dummy-composition.yaml
 ```
 
-Use:
+## Cleanup
 ```
-kubectl apply -f ship-1.yaml
-
-kubectl get ships -o=custom-columns=NAME:.metadata.name,LNG:.status.lng,LAT:.status.lat
-NAME            LNG       LAT
-ship-test-123   1.35469   53.99429
-```
-
-Cleanup:
-```
-kubectl delete -f ship-1.yaml
+kubectl delete -f ships.yaml
 kubectl delete composition.apiextensions.crossplane.io/xships-dummy
 kubectl delete compositeresourcedefinition.apiextensions.crossplane.io/xships.logistics.example.com
 ```
+
+## Demo
+
+See [demo.md]
