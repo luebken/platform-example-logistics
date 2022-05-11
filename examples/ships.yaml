@@ -43,7 +43,7 @@ metadata:
 spec:
   parameters:
     shipName: "Begonia-Seaways"
-    imo: ""
+    imo: "9262089"
 ---
 apiVersion: logistics.example.com/v1alpha1
 kind: Ship
@@ -54,5 +54,5 @@ metadata:
 spec:
   parameters:
     shipName: "Botnia-Seaways"
-    imo: "?"
+    imo: "9192129"
 ---
