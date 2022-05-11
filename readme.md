@@ -14,16 +14,17 @@ helm list -n crossplane-system
 ## Install Providers
 ```
 kubectl crossplane install provider crossplane/provider-nop:v0.1.1
-kubectl crossplane install provider luebken/provider-gps-dummy:v0.1.4
+kubectl crossplane install provider luebken/provider-gps-dummy:v0.1.7
 kubectl apply -f config-provider-gps.yaml
+
+kubectl get providers
 ```
 
 ## Install the Logistics Platform
 ```
 kubectl apply -f apis/
 
-kubectl get xrds
-kubectl get compositions
+kubectl get xrds,compositions
 ```
 ## Install Example Data
 
@@ -37,6 +38,8 @@ kubectl get terminals,ships,trucks,containers
 ```
 kubectl delete -f examples/
 kubectl delete -f apis/
+
+kind delete clusters kind
 ```
 
 ## Demo
