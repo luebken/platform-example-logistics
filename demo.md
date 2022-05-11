@@ -15,7 +15,15 @@ We will be demoing the following:
 7. How to move Digital Twins
 8. K8s tools
 
+## Overview
 
+```mermaid
+  graph TD;
+      Ship-->GPS-Sensor;
+      Ship-->Some-Sensor1;
+      Truck-->Ship;
+      Truck-->Some-Sensor2;
+```
 
 ## 1. Composing Digital Twins
 * Explain XRD:
