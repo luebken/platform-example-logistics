@@ -2,7 +2,6 @@ apiVersion: logistics.example.com/v1alpha1
 kind: Ship
 metadata:
   name: petunia-seaways
-  namespace: default
 spec:
   compositionSelector:
     matchLabels:
@@ -15,7 +14,6 @@ apiVersion: logistics.example.com/v1alpha1
 kind: Ship
 metadata:
   name: primula-seaways
-  namespace: default
 spec:
   compositionSelector:
     matchLabels:
@@ -28,7 +26,6 @@ apiVersion: logistics.example.com/v1alpha1
 kind: Ship
 metadata:
   name: humber-viking
-  namespace: default
 spec:
   compositionSelector:
     matchLabels:
