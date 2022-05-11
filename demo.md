@@ -15,6 +15,8 @@ We will be demoing the following:
 7. How to move Digital Twins
 8. K8s tools
 
+
+
 ## 1. Composing Digital Twins
 * Explain XRD:
   * cat ship-xrd.yaml
@@ -25,6 +27,7 @@ We will be demoing the following:
 kubectl get ships
 kubectl get trucks
 kubectl get trucks -l ship=petunia-seaways
+kubectl get trucks -o=custom-columns='NAME:metadata.name,SHIP:metadata.labels.ship'
 ```
 
 ## 3. Enrich with Custom Senors
