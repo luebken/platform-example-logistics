@@ -25,6 +25,12 @@ kubectl apply -f truck-dummy-composition.yaml
 kubectl get xrds
 kubectl get compositions
 ```
+## Install Example Data
+
+```
+kubectl apply -f ships.yaml
+kubectl apply -f trucks.yaml
+```
 
 ## Cleanup
 ```
