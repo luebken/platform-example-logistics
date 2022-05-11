@@ -19,10 +19,19 @@ We will be demoing the following:
 
 ```mermaid
   graph TD;
+      Terminal-->Ship
+      Terminal-->Truck
+      Ship-->Container;
+      Truck-->Container;
+```
+```mermaid
+  graph TD;
       Ship-->GPS-Sensor;
-      Ship-->Some-Sensor1;
-      Truck-->Ship;
-      Truck-->Some-Sensor2;
+      Ship-->Fuel-Sensor;
+      Truck-->GPS-Sensor;
+      Truck-->Fuel-Sensor;
+      Container-->Some-Sensor;
+      Fuel-Sensor-->IoT-Hub;
 ```
 
 ## 1. Composing Digital Twins
@@ -32,10 +41,17 @@ We will be demoing the following:
 
 ## 2. Query
 ```
+kubectl get terminal
+kubectl get terminal -l country=denmark
+
 kubectl get ships
+kubectl get ships -l terminal=copenhagen
+
 kubectl get trucks
-kubectl get trucks -l ship=petunia-seaways
-kubectl get trucks -o=custom-columns='NAME:metadata.name,SHIP:metadata.labels.ship'
+kubectl get trucks -l terminal=copenhagen
+kubectl get trucks -o=custom-columns='NAME:metadata.name,TERMINAL:metadata.labels.terminal'
+
+kubectl get containers
 ```
 
 ## 3. Enrich with Custom Senors
@@ -62,7 +78,14 @@ TODO. Add some simple S3 bucket to store some data
 * Note that this could also be a service in the future. Self drving trucks.
 
 ## 7. Move XRDs
-* Bacup and deploy with velero
+Great for digital twins
+
+e.g. cluster sync via UXP 
+
+Demo Reconciliation by moving ship by export & import
+
+
+* idea Backup and deploy with velero
 
 ## 8. K8s Tools
 TODO use other tooling from the K8s ecosystem e.g. Lens, Velero, Prometheus, Loki, Traffic, LinkerD, Robusta, Datree, Kverno

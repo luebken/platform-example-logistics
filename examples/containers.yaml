@@ -1,0 +1,54 @@
+apiVersion: logistics.example.com/v1alpha1
+kind: Container
+metadata:
+  name: xyz-987654321-ab
+  labels:
+    ship: petunia-seaways
+spec:
+  parameters:
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Container
+metadata:
+  name: xyz-987654322-cd
+  labels:
+    ship: petunia-seaways
+spec:
+  parameters:
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Container
+metadata:
+  name: xyz-987654323-ef
+  labels:
+    ship: primula-seaways
+spec:
+  parameters:
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Container
+metadata:
+  name: xyz-987654324-gh
+  labels:
+    truck: truck-123456
+spec:
+  parameters:
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Container
+metadata:
+  name: xyz-987654325-ij
+  labels:
+    truck: truck-123457
+spec:
+  parameters:
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Container
+metadata:
+  name: xyz-987654326-kl
+  labels:
+    truck: truck-123458
+spec:
+  parameters:
+---

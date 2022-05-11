@@ -1,0 +1,41 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xterminals.logistics.example.com
+spec:
+  group: logistics.example.com
+  names:
+    kind: XTerminal
+    plural: xterminals
+  claimNames:
+    kind: Terminal
+    plural: terminals
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true
+    additionalPrinterColumns:
+    - jsonPath: .spec.parameters.country
+      name: COUNTRY
+      type: string
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              parameters:
+                type: object
+                properties:
+                  name:
+                    description: The name of the terminal
+                    type: string
+                  country:
+                    description: The country of the location of the terminal
+                    type: string
+                required:
+                - name
+                - country
+            required:
+            - parameters

@@ -1,0 +1,66 @@
+apiVersion: logistics.example.com/v1alpha1
+kind: Terminal
+metadata:
+  name: copenhagen
+  labels:
+    country: denmark
+spec:
+  parameters:
+    name: Copenhagen
+    country: Denmark
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Terminal
+metadata:
+  name: hamburg
+  labels:
+    country: germany
+spec:
+  parameters:
+    name: Hamburg
+    country: Germany
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Terminal
+metadata:
+  name: immingham
+  labels:
+    country: uk
+spec:
+  parameters:
+    name: Immingham
+    country: UK
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Terminal
+metadata:
+  name: brevik
+  labels:
+    country: norway
+spec:
+  parameters:
+    name: Brevik
+    country: Norway
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Terminal
+metadata:
+  name: fredrikstad
+  labels:
+    country: sweden
+spec:
+  parameters:
+    name: Fredrikstad
+    country: Sweden
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Terminal
+metadata:
+  name: brugge
+  labels:
+    country: belgium
+spec:
+  parameters:
+    name: Brugge
+    country: Belgium
+---

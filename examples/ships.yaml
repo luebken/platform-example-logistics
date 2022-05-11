@@ -1,0 +1,58 @@
+apiVersion: logistics.example.com/v1alpha1
+kind: Ship
+metadata:
+  name: petunia-seaways
+spec:
+  parameters:
+    shipName: "Petunia Seaways"
+    imo: "9259501"
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Ship
+metadata:
+  name: primula-seaways
+spec:
+  parameters:
+    shipName: "Primula Seaways"
+    imo: "9259513"
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Ship
+metadata:
+  name: humber-viking
+  labels:
+    terminal: copenhagen
+spec:
+  parameters:
+    shipName: "Humber Viking"
+    imo: "9457177"
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Ship
+metadata:
+  name: selandia-seaways
+spec:
+  parameters:
+    shipName: "Selandia-Seaways"
+    imo: "9157284"
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Ship
+metadata:
+  name: begonia-seaways
+spec:
+  parameters:
+    shipName: "Begonia-Seaways"
+    imo: ""
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Ship
+metadata:
+  name: botnia-seaways
+  labels:
+    terminal: hamburg
+spec:
+  parameters:
+    shipName: "Botnia-Seaways"
+    imo: "?"
+---

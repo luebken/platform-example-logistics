@@ -21,6 +21,9 @@ spec:
     - jsonPath: .status.lng
       name: LNG
       type: string
+    - jsonPath: .metadata.labels.terminal
+      name: TERMINAL
+      type: string
     schema:
       openAPIV3Schema:
         type: object
