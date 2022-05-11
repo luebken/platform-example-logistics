@@ -12,13 +12,18 @@ helm install crossplane --namespace crossplane-system --create-namespace crosspl
 ```
 kubectl crossplane install provider luebken/provider-gps-dummy:v0.1.4
 kubectl crossplane install provider crossplane/provider-nop:v0.1.1
+kubectl apply -f config-provider-gps.yaml
 ```
 
 ## Install the Logistics Platform
-Define:
 ```
 kubectl apply -f ship-xrd.yaml
 kubectl apply -f ship-dummy-composition.yaml
+kubectl apply -f truck-xrd.yaml
+kubectl apply -f truck-dummy-composition.yaml
+
+kubectl get xrds
+kubectl get compositions
 ```
 
 ## Cleanup
