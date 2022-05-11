@@ -1,0 +1,26 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xtrucks-dummy
+  labels:
+    provider: dummy
+spec:
+  compositeTypeRef:
+    apiVersion: logistics.example.com/v1alpha1
+    kind: XTruck
+  resources:
+  - name: somesensor
+    base:
+      apiVersion: nop.crossplane.io/v1alpha1
+      kind: NopResource
+      metadata:
+        name: somesensor
+      spec:
+        forProvider:
+          conditionAfter:
+            - conditionType: "Ready"
+              conditionStatus: "True"
+              time: "3s"
+            - conditionType: "Synced"
+              conditionStatus: "True"
+              time: "1s"

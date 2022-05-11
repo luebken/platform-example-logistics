@@ -1,0 +1,84 @@
+apiVersion: logistics.example.com/v1alpha1
+kind: Truck
+metadata:
+  name: truck-123456
+  labels:
+    ship: petunia-seaways
+spec:
+  compositionSelector:
+    matchLabels:
+      provider: dummy
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Truck
+metadata:
+  name: truck-123457
+  labels:
+    ship: petunia-seaways
+spec:
+  compositionSelector:
+    matchLabels:
+      provider: dummy
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Truck
+metadata:
+  name: truck-123458
+  labels:
+    ship: petunia-seaways
+spec:
+  compositionSelector:
+    matchLabels:
+      provider: dummy
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Truck
+metadata:
+  name: truck-123459
+  labels:
+    ship: primula-seaways
+spec:
+  compositionSelector:
+    matchLabels:
+      provider: dummy
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Truck
+metadata:
+  name: truck-123460
+  labels:
+    ship: primula-seaways
+spec:
+  compositionSelector:
+    matchLabels:
+      provider: dummy
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Truck
+metadata:
+  name: truck-123461
+  labels:
+    ship: primula-seaways
+spec:
+  compositionSelector:
+    matchLabels:
+      provider: dummy
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Truck
+metadata:
+  name: truck-123462
+spec:
+  compositionSelector:
+    matchLabels:
+      provider: dummy
+---
+apiVersion: logistics.example.com/v1alpha1
+kind: Truck
+metadata:
+  name: truck-123463
+spec:
+  compositionSelector:
+    matchLabels:
+      provider: dummy
+---
