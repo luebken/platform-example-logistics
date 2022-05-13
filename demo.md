@@ -2,7 +2,17 @@
 
 The following demo shows how Crossplane and the Kubernetes ecosystem can be used to build digital twins in the logistics field.
 
-A digital twin is a unique digital representation that serves as the real-time digital counterpart of a physical object or process. It updates itself on it's state, condition and context. And provider value by visualization, analysis, prediction and optimization.
+## Digital Twins
+
+A digital twin is a unique digital representation that serves as the real-time digital counterpart of a physical object or process. It updates itself on it's state, condition and context. And provides value by visualization, analysis, prediction and optimization.
+
+## Digital Twins in Shipping Logistics
+
+Digital twins can be used for a variety for use-cases in shipping logistics. For the sake of this demo we'll focus on Trailers, Ships, Trucks and Trailers. 
+
+Crossplane and the Kubernetes Ecosystem provides us with an incredible platform which we can use to build and operator digital twins.  
+
+### Demo
 
 We will be demoing the following: 
 
