@@ -38,6 +38,7 @@ Sensor
       Fuel-Sensor-->IoT-Hub-Sensor;
       Weather-Sensor-->IoT-Hub-Sensor;
       Temperature-Sensor-->IoT-Hub-Sensor
+      Moisture-Sensor-->IoT-Hub-Sensor
 ```
 
 ## 1. Composing Digital Twins
