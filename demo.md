@@ -17,21 +17,27 @@ We will be demoing the following:
 
 ## Overview
 
+Domain:
 ```mermaid
   graph TD;
       Terminal-->Ship
       Terminal-->Truck
-      Ship-->Container;
-      Truck-->Container;
+      Ship-->Trailer;
+      Truck-->Trailer;
 ```
+Sensor
 ```mermaid
   graph TD;
       Ship-->GPS-Sensor;
       Ship-->Fuel-Sensor;
+      Ship-->Weather-Sensor;
       Truck-->GPS-Sensor;
       Truck-->Fuel-Sensor;
-      Container-->Some-Sensor;
-      Fuel-Sensor-->IoT-Hub;
+      Trailer-->Temperature-Sensor;
+      Trailer-->Moisture-Sensor;
+      Fuel-Sensor-->IoT-Hub-Sensor;
+      Weather-Sensor-->IoT-Hub-Sensor;
+      Temperature-Sensor-->IoT-Hub-Sensor
 ```
 
 ## 1. Composing Digital Twins
