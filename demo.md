@@ -61,7 +61,7 @@ https://github.com/luebken/platform-example-logistics/blob/main/apis/ship-xrd.ya
 
 # Investigate the new CRDs
 kubectl get crds | grep logistics
-kubectl get crds xships.logistics.example.com -o yaml | more
+kubectl get crds xships.logistics.example.com -o yaml
 ```
 
 ## 2. Install Example Data
@@ -76,26 +76,18 @@ kubectl apply -f examples/
 
 ## 3. How to enrich Digital Twins with Sensors
 
-https://github.com/luebken/provider-gps-dummy
+https://github.com/luebken/platform-example-logistics/blob/main/apis/ship-dummy-composition.yaml
 
 https://github.com/luebken/provider-gps-dummy/blob/main/internal/controller/vesselgpstype/vesselgpstype.go#L133
 
-https://github.com/luebken/platform-example-logistics/blob/main/apis/ship-dummy-composition.yaml
 
 
 ## 4. How to query with Digital Twins
 ```
-kubectl get terminal
 kubectl get terminal -l country=denmark
-
-kubectl get ships
 kubectl get ships -l terminal=copenhagen
-
-kubectl get trucks
 kubectl get trucks -l terminal=copenhagen
 kubectl get trucks -o=custom-columns='NAME:metadata.name,TERMINAL:metadata.labels.terminal'
-
-kubectl get containers
 ```
 
 ## 5. How to update Digital Twins
@@ -111,12 +103,11 @@ Outlook: Deploy a policy that updates the terminaal.
 ## 6. How to move Digital Twins
 Dummy Import & Export
 ```
-kubectl get containers -o yaml | yq eval 'del(.metadata.resourceVersion, .metadata.uid, .metadata.generation, .metadata.annotations, .metadata.creationTimestamp, .metadata.selfLink, .metadata.managedFields, .metadata.finalizers, .status, .spec.resourceRef)' - >containers-exported.yaml
-
-kubectl delete -f examples/
+kubectl get containers xyz-987654321-ab -o yaml | yq eval 'del(.metadata.resourceVersion, .metadata.uid, .metadata.generation, .metadata.annotations, .metadata.creationTimestamp, .metadata.selfLink, .metadata.managedFields, .metadata.finalizers, .status, .spec.resourceRef)' - >export.yaml
 
 # switch cluster
-kubectl apply -f containers-exported.yaml
+kubectl delete -f examples/
 
+kubectl apply -f export.yaml
 ```
 
