@@ -46,6 +46,10 @@ Sensor:
 
 We will be demoing the following:
 
+## Cleanup
+kubectl delete -f examples/
+kubectl delete -f apis/
+
 ## 1. Install the Logistics Platform
 ```
 # Investigate the existing CRDs
@@ -81,26 +85,25 @@ https://github.com/luebken/platform-example-logistics/blob/main/apis/ship-dummy-
 https://github.com/luebken/provider-gps-dummy/blob/main/internal/controller/vesselgpstype/vesselgpstype.go#L133
 
 
-
 ## 4. How to query with Digital Twins
 ```
 kubectl get terminal -l country=denmark
 kubectl get ships -l terminal=copenhagen
-kubectl get trucks -l terminal=copenhagen
 kubectl get trucks -o=custom-columns='NAME:metadata.name,TERMINAL:metadata.labels.terminal'
 ```
 
 ## 5. How to update Digital Twins
 
 ```
-kubectl get ships humber-viking
 kubectl label ships humber-viking terminal=valencia --overwrite=true
-kubectl get ships humber-viking
 ```
 
 Outlook: Deploy a policy that updates the terminaal.
 
 ## 6. How to move Digital Twins
+
+watch kubectl get container
+
 Dummy Import & Export
 ```
 kubectl get containers xyz-987654321-ab -o yaml | yq eval 'del(.metadata.resourceVersion, .metadata.uid, .metadata.generation, .metadata.annotations, .metadata.creationTimestamp, .metadata.selfLink, .metadata.managedFields, .metadata.finalizers, .status, .spec.resourceRef)' - >export.yaml
