@@ -9,6 +9,7 @@ helm install crossplane --namespace crossplane-system --create-namespace crosspl
 
 kubectl get pods -n crossplane-system
 helm list -n crossplane-system
+kubectl get crds
 ```
 
 ## Install Providers
