@@ -28,8 +28,6 @@ spec:
     base:
       apiVersion: sample.gps.crossplane.io/v1alpha1
       kind: VesselGpsType
-      metadata:
-        name: "vessel-imo-9259501"
       spec:
         providerConfigRef:
           name: example
