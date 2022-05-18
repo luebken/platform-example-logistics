@@ -4,7 +4,13 @@ The following demo shows how Crossplane and the Kubernetes ecosystem can be used
 
 ## Digital Twins
 
-A digital twin is a unique digital representation that serves as the real-time digital counterpart of a physical object or process. It updates itself on it's state, condition and context. And provides value by visualization, analysis, prediction and optimization.
+A digital twin is a unique digital representation that serves as the real-time digital counterpart of a physical object or process. Digital twins mimic behavioral models in physical systems and offers a digital control plane for a physical world. It updates itself on it's state, condition and context. And provides value by visualization, analysis, prediction and optimization.
+
+Digital twins are digital representations of physical assets
+Digital twins mimic behavioral models in physical systems
+Digital twins offers a digital control plane for a physical world
+Digital twins tethers to their physical counterpart from cradle to grave
+
 
 ## Digital Twins in Shipping Logistics
 
@@ -13,20 +19,6 @@ Digital twins can be used for a variety for use-cases in shipping logistics. For
 Crossplane and the Kubernetes Ecosystem provides us with an incredible platform which we can use to build and operator digital twins.  
 
 ### Demo
-
-We will be demoing the following: 
-
-1. How to compose Digital Twins with XRDs
-2. How to query Digital Twins
-3. How to enrich Digital Twins with Custom Sensors
-4. How to enrich Digital Twins with Cloud Resources
-5. How Digital Twins are updateting themselves
-6. How to update Digital Twins
-7. How to move Digital Twins
-8. K8s tools
-
-## Overview
-
 Domain:
 ```mermaid
   graph TD;
@@ -35,7 +27,8 @@ Domain:
       Ship-->Trailer;
       Truck-->Trailer;
 ```
-Sensor
+
+Sensor:
 ```mermaid
   graph TD;
       Ship-->GPS-Sensor;
@@ -51,12 +44,36 @@ Sensor
       Moisture-Sensor-->IoT-Hub-Sensor
 ```
 
-## 1. Composing Digital Twins
-* Explain XRD:
-  * cat ship-xrd.yaml
-  * cat truck-xrd.yaml
+We will be demoing the following:
 
-## 2. Query
+## 
+
+## 1. Install the Logistics Platform
+```
+# Investigate the platform
+kubectl get crds
+
+kubectl apply -f apis/
+
+kubectl get xrds,compositions
+
+https://github.com/luebken/platform-example-logistics/blob/main/apis/ship-xrd.yaml 
+
+kubectl get crds
+kubectl get crds xships.logistics.example.com -o yaml
+
+```
+
+## 2. Install Example Data
+
+```
+cat examples/*
+kubectl apply -f examples/
+
+watch kubectl get terminals,ships,trucks,containers
+```
+
+## 3. How to query with Digital Twins
 ```
 kubectl get terminal
 kubectl get terminal -l country=denmark
@@ -71,39 +88,33 @@ kubectl get trucks -o=custom-columns='NAME:metadata.name,TERMINAL:metadata.label
 kubectl get containers
 ```
 
-## 3. Enrich with Custom Senors
-* Explain Providers
-  * Walk through dummy GPS provider: https://github.com/luebken/provider-gps-dummy
-  * TBD: Walk through MQTT powered fuel provider
+## 4. How to enrich Digital Twins with Sensors
 
-* Explain Compositions
-  * cat ship-dummy-composition.yaml
+https://github.com/luebken/provider-gps-dummy
 
-TODO query ships in a specific region (with some geo spatial api)
-TODO Open Google Maps
+https://github.com/luebken/provider-gps-dummy/blob/main/internal/controller/vesselgpstype/vesselgpstype.go#L133
 
-## 4. Enrich with Cloud Resources
-TODO. Add some simple S3 bucket to store some data
+https://github.com/luebken/platform-example-logistics/blob/main/apis/ship-dummy-composition.yaml
 
-## 5. Reconciliation
-* Recap on desired state vs actual state
-* TODO find a good drift example
-* TODO show how a sensor change propagates to the XRD 
+## 5. How to update Digital Twins
 
-## 6. Change XRDs
-* Update the XRD for a vessel to be on another ship
-* Note that this could also be a service in the future. Self drving trucks.
+```
+kubectl get ships humber-viking
+kubectl label ships humber-viking terminal=valencia --overwrite=true
+kubectl get ships humber-viking
+```
 
-## 7. Move XRDs
-Great for digital twins
+Outlook: Deploy a policy that updates the terminaal.
 
-e.g. cluster sync via UXP 
+## 6. How to move Digital Twins
+Dummy Import & Export
+```
+kubectl get containers -o yaml | yq eval 'del(.metadata.resourceVersion, .metadata.uid, .metadata.generation, .metadata.annotations, .metadata.creationTimestamp, .metadata.selfLink, .metadata.managedFields, .metadata.finalizers, .status, .spec.resourceRef)' - >containers-exported.yaml
 
-Demo Reconciliation by moving ship by export & import
+kubectl delete -f examples/
 
+# switch cluster
+kubectl apply -f containers-exported.yaml
 
-* idea Backup and deploy with velero
-
-## 8. K8s Tools
-TODO use other tooling from the K8s ecosystem e.g. Lens, Velero, Prometheus, Loki, Traffic, LinkerD, Robusta, Datree, Kverno
+```
 

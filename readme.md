@@ -21,20 +21,6 @@ kubectl apply -f config-provider-gps.yaml
 kubectl get providers
 ```
 
-## Install the Logistics Platform
-```
-kubectl apply -f apis/
-
-kubectl get xrds,compositions
-```
-## Install Example Data
-
-```
-kubectl apply -f examples/
-
-kubectl get terminals,ships,trucks,containers
-```
-
 ## Cleanup
 ```
 kubectl delete -f examples/
