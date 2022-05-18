@@ -46,34 +46,44 @@ Sensor:
 
 We will be demoing the following:
 
-## 
-
 ## 1. Install the Logistics Platform
 ```
-# Investigate the platform
+# Investigate the existing CRDs
 kubectl get crds
 
+# Install the platform
 kubectl apply -f apis/
 
+# Investigate the Crossplane definitions
 kubectl get xrds,compositions
 
 https://github.com/luebken/platform-example-logistics/blob/main/apis/ship-xrd.yaml 
 
-kubectl get crds
-kubectl get crds xships.logistics.example.com -o yaml
-
+# Investigate the new CRDs
+kubectl get crds | grep logistics
+kubectl get crds xships.logistics.example.com -o yaml | more
 ```
 
 ## 2. Install Example Data
 
 ```
+# Examples data. Domain specific CRs:
 cat examples/*
-kubectl apply -f examples/
 
-watch kubectl get terminals,ships,trucks,containers
+watch kubectl get terminals,ships
+kubectl apply -f examples/
 ```
 
-## 3. How to query with Digital Twins
+## 3. How to enrich Digital Twins with Sensors
+
+https://github.com/luebken/provider-gps-dummy
+
+https://github.com/luebken/provider-gps-dummy/blob/main/internal/controller/vesselgpstype/vesselgpstype.go#L133
+
+https://github.com/luebken/platform-example-logistics/blob/main/apis/ship-dummy-composition.yaml
+
+
+## 4. How to query with Digital Twins
 ```
 kubectl get terminal
 kubectl get terminal -l country=denmark
@@ -87,14 +97,6 @@ kubectl get trucks -o=custom-columns='NAME:metadata.name,TERMINAL:metadata.label
 
 kubectl get containers
 ```
-
-## 4. How to enrich Digital Twins with Sensors
-
-https://github.com/luebken/provider-gps-dummy
-
-https://github.com/luebken/provider-gps-dummy/blob/main/internal/controller/vesselgpstype/vesselgpstype.go#L133
-
-https://github.com/luebken/platform-example-logistics/blob/main/apis/ship-dummy-composition.yaml
 
 ## 5. How to update Digital Twins
 
