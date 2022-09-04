@@ -6,17 +6,17 @@ The following demo shows how Crossplane and the Kubernetes ecosystem can be used
 
 A digital twin is a unique digital representation that serves as the real-time digital counterpart of a physical object or process. Digital twins mimic behavioral models in physical systems and offers a digital control plane for a physical world. It updates itself on it's state, condition and context. And provides value by visualization, analysis, prediction and optimization.
 
-Digital twins are digital representations of physical assets
-Digital twins mimic behavioral models in physical systems
-Digital twins offers a digital control plane for a physical world
-Digital twins tethers to their physical counterpart from cradle to grave
+* Digital twins are digital representations of physical assets
+* Digital twins mimic behavioral models in physical systems
+* Digital twins offers a digital control plane for a physical world
+* Digital twins tethers to their physical counterpart from cradle to grave
 
 
 ## Digital Twins in Shipping Logistics
 
-Digital twins can be used for a variety for use-cases in shipping logistics. For the sake of this demo we'll focus on Trailers, Ships, Trucks and Trailers. 
+Digital twins can be used for a variety for use-cases in shipping logistics. For the sake of this demo we'll focus on Terminals, Ships, Trucks and Containers. 
 
-Crossplane and the Kubernetes Ecosystem provides us with an incredible platform which we can use to build and operator digital twins.  
+Crossplane and the Kubernetes ecosystem provides us with an incredible platform which we can use to build and operator digital twins.  
 
 ### Demo
 Domain:
@@ -24,8 +24,8 @@ Domain:
   graph TD;
       Terminal-->Ship
       Terminal-->Truck
-      Ship-->Trailer;
-      Truck-->Trailer;
+      Ship-->Container;
+      Truck-->Container;
 ```
 
 Sensor:
@@ -36,8 +36,8 @@ Sensor:
       Ship-->Weather-Sensor;
       Truck-->GPS-Sensor;
       Truck-->Fuel-Sensor;
-      Trailer-->Temperature-Sensor;
-      Trailer-->Moisture-Sensor;
+      Container-->Temperature-Sensor;
+      Container-->Moisture-Sensor;
       Fuel-Sensor-->IoT-Hub-Sensor;
       Weather-Sensor-->IoT-Hub-Sensor;
       Temperature-Sensor-->IoT-Hub-Sensor
@@ -46,24 +46,40 @@ Sensor:
 
 We will be demoing the following:
 
-## Cleanup
+## 0. Pre-requisites
+See [readme.md](readme.md)
+
+```
+# K8s cluster with Crossplane installed
+helm list -n upbound-system
+kubectl get pods -n upbound-system
+
+# Cleanup previous demo
 kubectl delete -f examples/
 kubectl delete -f apis/
+```
 
 ## 1. Install the Logistics Platform
 ```
-# Investigate the existing CRDs
+# Investigate the existing CRDs 
+# which are mainly defining the Crossplane runtime
 kubectl get crds
+
+# List the avaible providers
+kubectl get providers
 
 # Install the platform
 kubectl apply -f apis/
 
-# Investigate the Crossplane definitions
-kubectl get xrds,compositions
+# Investigate the Crossplane API definitions
+# which define a terminal, ship, truck and container 
+kubectl get xrds
 
-https://github.com/luebken/platform-example-logistics/blob/main/apis/ship-xrd.yaml 
+# and their implementations
+kubectl get compositions
+kubectl get compositions xships-dummy -o yaml
 
-# Investigate the new CRDs
+# Investigate the new CRDs / APIs
 kubectl get crds | grep logistics
 kubectl get crds xships.logistics.example.com -o yaml
 ```
@@ -71,16 +87,22 @@ kubectl get crds xships.logistics.example.com -o yaml
 ## 2. Install Example Data
 
 ```
-# Examples data. Domain specific CRs:
+# Install some examples data. 
+# Some terminals, ships, trucks and containers
 cat examples/*
+
+# Watch terminals and ships.
+# As these sensors get online more information is 
 
 watch kubectl get terminals,ships
 kubectl apply -f examples/
 ```
 
+![image](get-terminals-ships.png)
+
 ## 3. How to enrich Digital Twins with Sensors
 
-https://github.com/luebken/platform-example-logistics/blob/main/apis/ship-dummy-composition.yaml
+kubectl apply -f apis/ship-dummy-composition.yaml
 
 https://github.com/luebken/provider-gps-dummy/blob/main/internal/controller/vesselgpstype/vesselgpstype.go#L133
 
@@ -92,13 +114,19 @@ kubectl get ships -l terminal=copenhagen
 kubectl get trucks -o=custom-columns='NAME:metadata.name,TERMINAL:metadata.labels.terminal'
 ```
 
+![image](get-trucks.png)
+
 ## 5. How to update Digital Twins
 
 ```
+kubectl get ships
 kubectl label ships humber-viking terminal=valencia --overwrite=true
+kubectl get ships
 ```
 
-Outlook: Deploy a policy that updates the terminaal.
+![image](get-ships.png)
+
+<!-- Outlook: Deploy a policy that updates the terminal.-->
 
 ## 6. How to move Digital Twins
 
