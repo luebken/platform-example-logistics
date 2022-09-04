@@ -98,7 +98,7 @@ watch kubectl get terminals,ships
 kubectl apply -f examples/
 ```
 
-![image](get-terminals-ships.png)
+![image](get-terminals-ships.gif)
 
 ## 3. How to enrich Digital Twins with Sensors
 
