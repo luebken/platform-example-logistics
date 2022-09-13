@@ -1,0 +1,19 @@
+apiVersion: meta.pkg.crossplane.io/v1
+kind: Configuration
+metadata:
+  name: platform-examples-logistics
+  meta.crossplane.io/maintainer: Matthias <matthias@upbound.io>
+  meta.crossplane.io/description: |
+    An example configuration on how to build an IoT-based logistics plaform.
+  meta.crossplane.io/readme: |
+    An example configuration on how to build an IoT-based logistics plaform. 
+    See https://github.com/luebken/platform-example-logistics
+  friendly-name.meta.crossplane.io: Provider AWS
+spec:
+  crossplane:
+    version: ">=v1.9.0"
+  dependsOn:
+    - provider: crossplane/provider-nop
+      version: "v0.1.1"
+    - provider: luebken/provider-gps-dummy
+      version: "v0.1.7"
